@@ -17,22 +17,21 @@ pipeline{
         stage("Build the Source Code"){
             steps{
                 echo "========Code Building is Starting========"
-                sh 'cd weshopify-platform-services-registry'
-                sh 'cd weshopify-platform-services-registry && mvn clean package -DskipTests=true'
+                sh 'mvn clean package -DskipTests=true'
                 echo "========Artifact Generated========"
             }
         }
         stage("Sonar Quality Analysis"){
             steps{
                 echo "========Sonar Quality Gate Starting========"
-                sh 'cd weshopify-platform-services-registry && mvn verify sonar:sonar -Dsonar.projectKey=weshopify-service-registry -Dsonar.host.url=http://13.127.8.30:9000 -Dsonar.login=sqp_54da1b69a98bc3ebd408ef38e0d21667b15cbc38 -DskipTests=true'
+                sh 'mvn verify sonar:sonar -Dsonar.projectKey=weshopify-service-registry -Dsonar.host.url=http://13.127.8.30:9000 -Dsonar.login=sqp_54da1b69a98bc3ebd408ef38e0d21667b15cbc38 -DskipTests=true'
                 echo "========Sonar Quality Gate Analyzed the Artifact========"
             }
         }
         stage("Deploy to Artifactory"){
             steps{
                 echo "========Deploying to Artifactory Started========"
-                sh 'cd weshopify-platform-services-registry && mvn deploy'
+                sh 'mvn deploy'
                 echo "========Artifact Deploy is Completed========"
             }
         }
@@ -40,9 +39,9 @@ pipeline{
             steps{
                 echo "Connecting to Ansible Server"
                 sshagent(['ANSIBLE_SERVER']){
-                    sh 'cd weshopify-platform-services-registry && scp Dockerfile ansible-admin@172.31.7.122:/opt/ci-cd-files'
-                    sh 'cd weshopify-platform-services-registry  && scp weshopify-svc-registry-playbook.yml ansible-admin@172.31.7.122:/opt/ci-cd-files'
-                    sh 'cd weshopify-platform-services-registry  && scp jfrog.sh ansible-admin@172.31.7.122:/opt/ci-cd-files'
+                    sh 'scp Dockerfile ansible-admin@172.31.7.122:/opt/ci-cd-files'
+                    sh 'scp weshopify-svc-registry-playbook.yml ansible-admin@172.31.7.122:/opt/ci-cd-files'
+                    sh 'scp jfrog.sh ansible-admin@172.31.7.122:/opt/ci-cd-files'
                     sh '''
                         ssh -tt ansible-admin@172.31.7.122 << EOF
                             ansible-playbook /opt/ci-cd-files/weshopify-svc-registry-playbook.yml
