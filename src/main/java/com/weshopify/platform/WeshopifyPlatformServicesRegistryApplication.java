@@ -10,7 +10,6 @@ import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.Bean;
 
-import io.micrometer.core.instrument.binder.system.ProcessorMetrics;
 
 @SpringBootApplication
 @EnableEurekaServer
@@ -20,11 +19,6 @@ public class WeshopifyPlatformServicesRegistryApplication {
 		SpringApplication.run(WeshopifyPlatformServicesRegistryApplication.class, args);
 	}
 	
-	@Bean
-	ProcessorMetrics processorMetrics() {
-		return new ProcessorMetrics();
-	}
-
 	@Bean
     public EurekaInstanceConfigBean eurekaInstanceConfig(InetUtils inetUtils){
 
