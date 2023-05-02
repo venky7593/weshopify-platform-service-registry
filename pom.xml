@@ -41,7 +41,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>		
+		</dependency>
+		<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-spring-legacy</artifactId>
+    <version>1.5.1</version>
+</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
