@@ -40,7 +40,14 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>		
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-core -->
+		<dependency>
+    		   <groupId>io.micrometer</groupId>
+    		   <artifactId>micrometer-core</artifactId>
+                   <version>1.10.6</version>
+               </dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
