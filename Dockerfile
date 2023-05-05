@@ -1,3 +1,5 @@
+#FROM openjdk:17-alpine
+
 FROM openjdk:17-jdk-slim as build
 
 ARG WORK_DIR=/opt/service-registry
